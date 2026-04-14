@@ -32,7 +32,7 @@ def cli(
     """Cyber Bonsai - Terminal ASCII bonsai that grows with your GitHub activity."""
     # Load config
     config = Config.load()
-    
+
     # Override with command line options
     if username:
         config.username = username
@@ -44,7 +44,7 @@ def cli(
         config.cache_duration = 0
     if no_color:
         config.color_scheme = "never"
-    
+
     # Store in context
     ctx.ensure_object(dict)
     ctx.obj["config"] = config
@@ -59,46 +59,46 @@ def show(ctx: click.Context) -> None:
     config: Config = ctx.obj["config"]
     console: Console = ctx.obj["console"]
     verbose: bool = ctx.obj["verbose"]
-    
+
     # Get username
     username = config.get_effective_username()
     if not username:
         console.print("[red]Error: GitHub username not configured.[/red]")
         console.print("Use --username or set CYBER_BONSAI_USERNAME")
         sys.exit(1)
-    
+
     # Initialize API client
     token = config.get_effective_token()
     cache_duration = 0 if config.cache_duration == 0 else config.cache_duration
-    
+
     try:
         api = GitHubAPI(
             username=username,
             token=token,
             cache_duration=cache_duration,
         )
-        
+
         if verbose:
             console.print(f"[dim]Fetching data for {username}...[/dim]")
-        
+
         # Fetch contributions
         contributions = api.fetch_contributions(days=config.time_window)
-        
+
         if verbose:
             console.print(f"[dim]Found {len(contributions.raw_events)} events[/dim]")
             console.print(f"[dim]Score: {contributions.total_score:.1f}[/dim]")
-        
+
         # Calculate growth stage
         growth = BonsaiGrowth()
         data = growth.get_stage_data(
             contributions.total_score,
             contributions.raw_events,
         )
-        
+
         # Render and display
         renderer = ASCIIRenderer(console)
         renderer.display(data)
-        
+
     except GitHubAPIError as e:
         console.print(f"[red]Error: {e}[/red]")
         sys.exit(e.exit_code)
@@ -116,13 +116,13 @@ def history(ctx: click.Context) -> None:
     """Show contribution history."""
     config: Config = ctx.obj["config"]
     console: Console = ctx.obj["console"]
-    
+
     username = config.get_effective_username()
     if not username:
         console.print("[red]Error: GitHub username not configured.[/red]")
         sys.exit(1)
-    
-    console.print(f"[yellow]History feature coming soon![/yellow]")
+
+    console.print("[yellow]History feature coming soon![/yellow]")
     console.print(f"Will show trends for {username} over {config.time_window} days")
 
 
@@ -139,10 +139,10 @@ def config_cmd() -> None:
 def config_set(ctx: click.Context, key: str, value: str) -> None:
     """Set configuration value."""
     console: Console = ctx.obj["console"]
-    
+
     # Load current config
     config = Config.load()
-    
+
     # Update value
     if hasattr(config, key):
         try:
@@ -160,7 +160,7 @@ def config_set(ctx: click.Context, key: str, value: str) -> None:
             sys.exit(1)
     else:
         console.print(f"[red]Unknown config key: {key}[/red]")
-        console.print(f"Available keys: username, cache_duration, time_window, color_scheme")
+        console.print("Available keys: username, cache_duration, time_window, color_scheme")
         sys.exit(1)
 
 
@@ -169,20 +169,20 @@ def config_set(ctx: click.Context, key: str, value: str) -> None:
 def config_show(ctx: click.Context) -> None:
     """Show current configuration."""
     console: Console = ctx.obj["console"]
-    
+
     config = Config.load()
-    
+
     from rich.table import Table
     table = Table(title="Configuration")
     table.add_column("Key", style="cyan")
     table.add_column("Value", style="green")
-    
+
     table.add_row("username", config.username or "(not set)")
     table.add_row("token", "***" if config.token else "(not set)")
     table.add_row("cache_duration", f"{config.cache_duration} seconds")
     table.add_row("time_window", f"{config.time_window} days")
     table.add_row("color_scheme", config.color_scheme)
-    
+
     console.print(table)
 
 
