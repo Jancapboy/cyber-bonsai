@@ -1,0 +1,86 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cyber-bonsai"
+version = "0.1.0"
+description = "Terminal ASCII bonsai that grows based on GitHub activity"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Jancapboy", email = "1069007377@qq.com"}
+]
+keywords = ["github", "ascii-art", "terminal", "bonsai", "productivity"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Terminals",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "requests>=2.31.0",
+    "rich>=13.0.0",
+    "click>=8.1.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+    "responses>=0.23.0",
+]
+
+[project.scripts]
+cyber-bonsai = "src.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Jancapboy/cyber-bonsai"
+Issues = "https://github.com/Jancapboy/cyber-bonsai/issues"
+
+[tool.black]
+line-length = 100
+target-version = ['py310', 'py311', 'py312']
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*", "*/test_*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+fail_under = 80

@@ -1,62 +1,59 @@
-# 🌳 Cyber Bonsai
+# Cyber Bonsai
 
-Terminal ASCII bonsai that grows or withers based on your GitHub activity.
+[![CI](https://github.com/Jancapboy/cyber-bonsai/actions/workflows/ci.yml/badge.svg)](https://github.com/Jancapboy/cyber-bonsai/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/Jancapboy/cyber-bonsai/branch/main/graph/badge.svg)](https://codecov.io/gh/Jancapboy/cyber-bonsai)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
+> Terminal ASCII bonsai that grows or withers based on your GitHub activity 🌱
 
-## 🎮 How it works
+## What is this?
 
-Your bonsai's health depends on your GitHub activity over the last 30 days:
+Cyber Bonsai is a terminal tool that visualizes your GitHub contribution activity as an ASCII bonsai tree. Every commit, issue, and PR becomes "water" for your bonsai, helping it grow from a 🌱 sprout to a 🌲 mighty tree.
 
-| Activity Score | State | Appearance |
-|---------------|-------|------------|
-| < 5 | ☠️ DEAD | Bare trunk |
-| 5-14 | 🍂 WITHERED | Sparse leaves |
-| 15-29 | 🌱 STRUGGLING | Growing |
-| 30-49 | 🌿 HEALTHY | Lush |
-| 50-79 | 🌳 THRIVING | Full canopy |
-| 80+ | ✨ LEGENDARY | Epic tree |
+## Features
 
-Activity score is calculated from:
-- Push events: +2 points
-- PRs/Create events: +3 points  
-- Issues: +1 point
-- Other: +0.5 point
+- 🌱 **4 Growth Stages**: Sprout → Growth → Mature → Full
+- 📊 **GitHub Integration**: Fetches your real contribution data
+- 🎨 **Beautiful ASCII Art**: Terminal-native visualization with colors
+- ⚡ **Fast**: Local caching, < 3s cold start
+- 🔧 **Configurable**: Time windows, color schemes, custom usernames
 
-## 🚀 Usage
+## Installation
 
 ```bash
-# Install
-pip install -r requirements.txt
-
-# Run with GitHub username
-python bonsai.py your_github_username
-
-# Or set env variable
-export GITHUB_USERNAME=yourname
-python bonsai.py
+pip install cyber-bonsai
 ```
 
-## 🔧 Optional: GitHub Token
-
-For private repos or higher API limits:
-```bash
-export GITHUB_TOKEN=your_token_here
-```
-
-## 📦 Install as CLI tool
+## Usage
 
 ```bash
-chmod +x bonsai.py
-sudo ln -s $(pwd)/bonsai.py /usr/local/bin/cyber-bonsai
-cyber-bonsai yourname
+# Show your bonsai status
+cyber-bonsai
+
+# Show with custom username
+cyber-bonsai -u yourusername
+
+# Show historical trend
+cyber-bonsai history
+
+# Configure default settings
+cyber-bonsai config set username yourusername
 ```
 
-## 🎯 Project Status
+## Growth System
 
-Part of the [10 creative projects challenge](https://github.com/Jancapboy/cyber-bonsai).
+| Stage | Contributions | Icon |
+|-------|--------------|------|
+| Sprout | 0-10 | 🌱 |
+| Growth | 11-30 | 🌿 |
+| Mature | 31-60 | 🌳 |
+| Full | 61+ | 🌲 |
 
-## 📄 License
+## Development
 
-MIT - Do whatever you want.
+See [DEV_SPEC.md](DEV_SPEC.md) for development guidelines.
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file.

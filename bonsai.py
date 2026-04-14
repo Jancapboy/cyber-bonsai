@@ -6,7 +6,7 @@ Cyber Bonsai - Terminal ASCII bonsai that grows or withers based on GitHub activ
 import os
 import sys
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import List, Tuple
 
 # ASCII art states of the bonsai
