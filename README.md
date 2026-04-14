@@ -47,6 +47,105 @@ cyber-bonsai history
 cyber-bonsai config set username yourusername
 ```
 
+## Demo
+
+### Sprout Stage (0-10 contributions)
+```
+┌─────────────────────────────┐
+│     🌱 Cyber Bonsai        │
+│                             │
+│            🌱               │
+│            |                │
+│           / \               │
+│                             │
+│  生长阶段: 萌芽期            │
+│  贡献积分: 5.0 / 10         │
+└─────────────────────────────┘
+```
+
+### Growth Stage (11-30 contributions)
+```
+┌─────────────────────────────┐
+│     🌿 Cyber Bonsai        │
+│                             │
+│           🌿                │
+│          /|\                │
+│         / | \               │
+│        /  |  \              │
+│                             │
+│  生长阶段: 生长期            │
+│  贡献积分: 18.5 / 30        │
+└─────────────────────────────┘
+```
+
+### Mature Stage (31-60 contributions)
+```
+┌─────────────────────────────┐
+│     🌳 Cyber Bonsai        │
+│                             │
+│          🌳                 │
+│         /|\                 │
+│        / | \                │
+│       /  |  \               │
+│      /___|___\              │
+│         |   |               │
+│                             │
+│  生长阶段: 成熟期            │
+│  贡献积分: 45.0 / 60        │
+└─────────────────────────────┘
+```
+
+### Full Stage (61+ contributions)
+```
+┌─────────────────────────────┐
+│     🌲 Cyber Bonsai        │
+│                             │
+│            🌲               │
+│           /||\              │
+│          / || \             │
+│         /__||__\            │
+│        /   ||   \           │
+│       /____||____\          │
+│          |    |             │
+│          |    |             │
+│                             │
+│  生长阶段: 完全体            │
+│  贡献积分: 85.0 / 85        │
+└─────────────────────────────┘
+```
+
+## Configuration
+
+Cyber Bonsai can be configured via command line, environment variables, or config file.
+
+### Priority (high to low)
+1. Command line arguments
+2. Environment variables
+3. Config file (`~/.config/cyber-bonsai/config.json`)
+4. Default values
+
+### Environment Variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `CYBER_BONSAI_USERNAME` | GitHub username | `Jancapboy` |
+| `CYBER_BONSAI_TOKEN` | GitHub Personal Access Token | `ghp_xxx` |
+| `CYBER_BONSAI_TIME_WINDOW` | Days to look back | `30` |
+| `CYBER_BONSAI_CACHE_DURATION` | Cache validity in seconds | `3600` |
+
+### Config Commands
+
+```bash
+# Set username
+cyber-bonsai config set username Jancapboy
+
+# Set time window (days)
+cyber-bonsai config set time_window 30
+
+# Show current config
+cyber-bonsai config show
+```
+
 ## Growth System
 
 | Stage | Contributions | Icon |
@@ -58,7 +157,51 @@ cyber-bonsai config set username yourusername
 
 ## Development
 
-See [DEV_SPEC.md](DEV_SPEC.md) for development guidelines.
+See [DEV_SPEC.md](DEV_SPEC.md) for detailed development guidelines.
+
+### Setup
+
+```bash
+git clone https://github.com/Jancapboy/cyber-bonsai.git
+cd cyber-bonsai
+pip install -r requirements-dev.txt
+```
+
+### Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run with coverage
+pytest --cov=src --cov-report=term-missing
+
+# Run specific test file
+pytest tests/test_bonsai.py
+```
+
+### Code Quality
+
+```bash
+# Format code
+black src/ tests/
+
+# Lint check
+ruff check src/ tests/
+
+# Type check (optional)
+mypy src/
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run tests and ensure they pass
+5. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
 
 ## License
 
