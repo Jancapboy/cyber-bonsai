@@ -5,5 +5,17 @@ __author__ = "Jancapboy"
 __email__ = "1069007377@qq.com"
 
 from src.bonsai import BonsaiGrowth, GrowthStage, BonsaiData
+from src.config import Config
+from src.github_api import GitHubAPI, ContributionData, GitHubAPIError
+from src.renderer import ASCIIRenderer
 
-__all__ = ["BonsaiGrowth", "GrowthStage", "BonsaiData"]
+__all__ = [
+    "BonsaiGrowth",
+    "GrowthStage",
+    "BonsaiData",
+    "Config",
+    "GitHubAPI",
+    "ContributionData",
+    "GitHubAPIError",
+    "ASCIIRenderer",
+]
