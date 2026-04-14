@@ -22,7 +22,13 @@ Cyber Bonsai is a terminal tool that visualizes your GitHub contribution activit
 ## Installation
 
 ```bash
+# From PyPI (when published)
 pip install cyber-bonsai
+
+# From source
+git clone https://github.com/Jancapboy/cyber-bonsai.git
+cd cyber-bonsai
+pip install -e .
 ```
 
 ## Usage
